@@ -119,9 +119,18 @@ class File extends Field
      */
     protected function uploadAndDeleteOriginal(UploadedFile $file)
     {
+
+		\Log::debug($file);
+
+		\Log::debug([$this->getDirectory(), $this->name]);
+
         $this->renameIfExists($file);
 
+		\Log::debug([$this->getDirectory(), $this->name]);
+
         $path = $this->storage->putFileAs($this->getDirectory(), $file, $this->name);
+
+		\Log::debug($path);
 
         $this->destroy();
 

@@ -23,7 +23,7 @@ class Map extends Field
         if (config('app.locale') == 'zh-CN') {
             $js = '//map.qq.com/api/js?v=2.exp';
         } else {
-            $js = '//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key='.env('GOOGLE_API_KEY');
+            $js = '//maps.googleapis.com/maps/api/js?v=3.exp&language=da&region=DK&key='.env('GOOGLE_API_KEY');
         }
 
         return compact('js');
@@ -52,20 +52,24 @@ class Map extends Field
 
     public function useGoogleMap()
     {
+		$defaultLatitude  = env('MAP_DEFAULT_LATITUDE');
+		$defaultLongitude = env('MAP_DEFAULT_LONGITUDE');
+
         $this->script = <<<EOT
         function initGoogleMap(name) {
             var lat = $('#{$this->id['lat']}');
             var lng = $('#{$this->id['lng']}');
 
-            var LatLng = new google.maps.LatLng(lat.val(), lng.val());
+            var LatLng = new google.maps.LatLng(lat.val() || $defaultLatitude, lng.val() || $defaultLongitude);
 
             var options = {
-                zoom: 13,
+                zoom: 14,
                 center: LatLng,
                 panControl: false,
                 zoomControl: true,
                 scaleControl: true,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: 'satellite',
+                gestureHandling: 'greedy'
             }
 
             var container = document.getElementById("map_"+name);

@@ -215,6 +215,8 @@ class Filter
      */
     public function execute()
     {
+//    	\Log::warning($this->model->addConditions($this->conditions())->buildData());
+
         return $this->model->addConditions($this->conditions())->buildData();
     }
 

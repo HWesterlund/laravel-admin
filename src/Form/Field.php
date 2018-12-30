@@ -314,6 +314,10 @@ class Field implements Renderable
         }
 
         $this->value = array_get($data, $this->column);
+
+//        if (is_array($this->value)) {
+//			$this->value = reset($this->value);
+//		}
     }
 
     /**

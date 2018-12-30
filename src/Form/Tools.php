@@ -3,7 +3,6 @@
 namespace Encore\Admin\Form;
 
 use Encore\Admin\Facades\Admin;
-use Encore\Admin\Form;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
@@ -42,6 +41,11 @@ class Tools implements Renderable
 
         $this->tools = new Collection();
     }
+
+    public function getBuilder()
+	{
+		return $this->form;
+	}
 
     /**
      * @return string

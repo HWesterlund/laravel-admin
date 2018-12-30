@@ -129,6 +129,11 @@ class Builder
         $this->mode = $mode;
     }
 
+	public function getForm()
+	{
+		return $this->form;
+    }
+
     /**
      * Returns builder is $mode.
      *
